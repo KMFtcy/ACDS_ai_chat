@@ -1,8 +1,10 @@
-from flask_restx import Api, Resource, fields
+from flask_restx import Api
+from flask import url_for
 from app.router import message as msgRouter
 import logging
+import urllib
 
-logger = logging.getLogger("dao")
+logger = logging.getLogger("router")
 
 class AppApi():
     api = None
@@ -15,6 +17,10 @@ class AppApi():
             description='A simple TodoMVC API',
         )
         self.api.add_namespace(msgRouter.api, path='/message')
+
+        # print router
+        for url in app.url_map.iter_rules():
+            logger.info(url)
         return
 
 appApi = AppApi()
