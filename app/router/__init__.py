@@ -1,5 +1,5 @@
 from flask_restx import Api, Resource, fields
-# from app.api.message.apiController import api as ns1
+from app.router import message as msgRouter
 import logging
 
 logger = logging.getLogger("dao")
@@ -14,6 +14,7 @@ class AppApi():
         self.api = Api(app, version='1.0', title='TodoMVC API',
             description='A simple TodoMVC API',
         )
+        self.api.add_namespace(msgRouter.api, path='/message')
         return
 
 appApi = AppApi()

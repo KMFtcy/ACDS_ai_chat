@@ -29,7 +29,7 @@ def create_app(flask_config_name=None):
     daoPool.init_app(app)
 
     ## Api init
-    from app.api import appApi
+    from app.router import appApi
     appApi.init_api(app)
 
     return app
