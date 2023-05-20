@@ -1,4 +1,4 @@
-pymysql
+mysqlclient
 Flask
 flask_sqlalchemy
 openai

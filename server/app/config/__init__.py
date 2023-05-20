@@ -1,9 +1,10 @@
 import os
+import yaml
 
 CONFIG_NAME_MAPPER = {
-    'development': 'config.Development.cfg',
-    'testing': 'config.Testing.cfg',
-    'production': 'config.Production.cfg'
+    'development': 'configDevelopment.cfg',
+    'testing': 'configTesting.yaml',
+    'production': 'configProduction.yaml'
 }
 
 class appConfig:
