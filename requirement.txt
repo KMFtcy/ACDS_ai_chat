@@ -2,3 +2,4 @@ mysqlclient
 Flask
 flask_sqlalchemy
 openai
+flask_restx

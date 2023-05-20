@@ -8,7 +8,6 @@ logger = logging.getLogger("dao")
 
 class DaoPool:
     sqlDAO = None
-    esDAO = None
 
     def __init__(self):
         pass

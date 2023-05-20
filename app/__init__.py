@@ -1,5 +1,4 @@
 import logging
-import os
 from flask import Flask
 from flask_cors import CORS, cross_origin
 
@@ -24,20 +23,13 @@ def create_app(flask_config_name=None):
         format=app.config["LOGGER_FORMAT"], level=app.config["LOGGER_LEVEL"]
     )
 
-    ## db init
+    ## DB init
     from app.dao import daoPool
 
     daoPool.init_app(app)
 
-    # from app.model.userModel import User
-
-    # me = User('admin', 'admin@example.com', None, None)
-    # daoPool.sqlDAO.session.add(me)
-    # daoPool.sqlDAO.session.commit()
-
     ## Api init
-    # from app.api import api
-
-    # api.init_app(app)
+    from app.api import appApi
+    appApi.init_api(app)
 
     return app
