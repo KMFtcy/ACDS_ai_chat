@@ -3,3 +3,4 @@ Flask
 flask_sqlalchemy
 openai
 flask_restx
+flask_cors
