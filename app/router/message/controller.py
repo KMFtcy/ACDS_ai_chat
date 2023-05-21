@@ -3,9 +3,13 @@ from flask_restx import Resource, Namespace
 
 from app.service import message as msg_service
 from app.router.message.api_model import ApiModel
+from app.router.decorate import token_required
+
+import logging
 
 api = Namespace("message", description="chat message related operations")
 model = ApiModel(api)
+# logger = logging.getLogger("router")
 
 
 @api.route("/")
@@ -29,7 +33,9 @@ class UserList(Resource):
 @api.route("/test")
 class TestApi(Resource):
     @api.expect(model, validate=True)
-    def get(self):
+    @token_required
+    def get(self,user_id):
+        print("user_id: " + user_id)
         return "success"
 # @api.route('/<public_id>')
 # @api.param('public_id', 'The User identifier')

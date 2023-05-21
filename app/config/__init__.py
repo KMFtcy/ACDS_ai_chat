@@ -1,5 +1,4 @@
 import os
-import yaml
 
 CONFIG_NAME_MAPPER = {
     'development': 'configDevelopment.cfg',

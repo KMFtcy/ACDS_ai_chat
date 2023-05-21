@@ -1,7 +1,8 @@
 mysqlclient
-Flask
+flask
 flask_sqlalchemy
 openai
 flask_restx
 flask_cors
 pymysql
+pyjwt
