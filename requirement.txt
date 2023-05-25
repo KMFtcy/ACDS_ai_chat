@@ -6,3 +6,4 @@ flask_restx
 flask_cors
 pymysql
 pyjwt
+flask_jwt_extended

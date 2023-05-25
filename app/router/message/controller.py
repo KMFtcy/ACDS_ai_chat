@@ -1,11 +1,12 @@
 from flask import request
 from flask_restx import Resource, Namespace
 
+from flask_jwt_extended import (create_access_token, create_refresh_token, jwt_required, get_jwt_identity, get_jwt)
+
 from app.service import message as msg_service
 from app.router.message.api_model import ApiModel
 from app.router.decorate import token_required
-
-import logging
+from app.router.request import response
 
 api = Namespace("message", description="chat message related operations")
 model = ApiModel(api)
@@ -13,14 +14,17 @@ model = ApiModel(api)
 
 
 @api.route("/")
-class UserList(Resource):
-    @api.doc("list_of_registered_users")
+class MessageList(Resource):
+    @api.doc("list_of_messages")
     # @api.marshal_list_with(_user, envelope='data')
+    @jwt_required()
     def get(self):
         """List all registered users"""
-        # return get_all_users()
-        return "success"
-
+        user_id = get_jwt_identity()
+        # access_token = create_access_token(identity=user_id)
+        result = msg_service.get_user_messages(user_id)
+        return response(data = result)
+ #
     # @api.response(201, 'User successfully created.')
     # @api.doc('create a new user')
     # @api.expect(_user, validate=True)
@@ -35,7 +39,7 @@ class TestApi(Resource):
     @api.expect(model, validate=True)
     @token_required
     def get(self,user_id):
-        print("user_id: " + user_id)
+        print("user_id: " + str(user_id))
         return "success"
 # @api.route('/<public_id>')
 # @api.param('public_id', 'The User identifier')

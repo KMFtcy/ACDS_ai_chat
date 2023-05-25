@@ -4,6 +4,7 @@ from app.router.message.controller import api as msgRouter
 import logging
 import urllib
 
+from flask_jwt_extended import JWTManager
 logger = logging.getLogger("router")
 
 class AppApi():
@@ -17,6 +18,7 @@ class AppApi():
             description='A simple TodoMVC API',
         )
         self.api.add_namespace(msgRouter, path='/message')
+        jwt = JWTManager(app)
 
         # print router
         for url in app.url_map.iter_rules():

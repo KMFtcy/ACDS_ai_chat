@@ -5,7 +5,7 @@ from app.auth.auth_helper import jwt_decode_auth_token
 
 import jwt
 
-key = "thisisthejwtkeyofacdsthisisthejwtkeyofacdsthisisthejwtkeyofacds"
+key = "this_is_the_key_for_JWT"
 
 def token_required(f):
     @wraps(f)
@@ -22,8 +22,7 @@ def token_required(f):
 
         try:
             # decoding the payload to fetch the stored details
-            data = jwt.decode(token,key,algorithms='HS256')
-            print(data)
+            user_jwt = jwt.decode(token,key,algorithms='HS256')
             # current_user = User.query\
             #     .filter_by(public_id = data['public_id'])\
             #     .first()
@@ -31,7 +30,7 @@ def token_required(f):
             print(e)
             return "something error"
         # returns the current logged in users context to the routes
-        return  f(data, *args, **kwargs)
+        return  f(user_jwt, *args, **kwargs)
 
     return decorated
 
