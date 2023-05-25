@@ -2,6 +2,9 @@
 LOGGER_FORMAT = '[%(asctime)s] [%(name)s] [%(levelname)s]  %(message)s'
 LOGGER_LEVEL = 20     ## CRITICAL=50, ERROR=40, WARNING=30, INFO=20, DEBUG=10, NOTSET=0
 
+## JWT authentication settings
+JWT_SECRET_KEY = "this_is_the_key_for_JWT"
+
 ## Database settings
 DATABASE={
     "host": "localhost",
