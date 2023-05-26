@@ -24,6 +24,14 @@ class MessageList(Resource):
         # access_token = create_access_token(identity=user_id)
         result = msg_service.get_user_messages(user_id)
         return response(data = result)
+
+    @api.doc("post_one_message")
+    @jwt_required()
+    def post(self):
+        message = api.payload["message"]
+        user_id = get_jwt_identity()
+        new_message = msg_service.add_one_message(user_id, message).to_dict()
+        return response(data = new_message)
  #
     # @api.response(201, 'User successfully created.')
     # @api.doc('create a new user')
@@ -34,13 +42,16 @@ class MessageList(Resource):
     #     return save_new_user(data=data)
 
 
+
 @api.route("/test")
 class TestApi(Resource):
-    @api.expect(model, validate=True)
-    @token_required
-    def get(self,user_id):
-        print("user_id: " + str(user_id))
-        return "success"
+    @api.expect(model.postModel, validate=True)
+    @jwt_required()
+    def get(self):
+        print("get it")
+        print(api.payload)
+        print("read it")
+        return response(data = "result")
 # @api.route('/<public_id>')
 # @api.param('public_id', 'The User identifier')
 # @api.response(404, 'User not found.')

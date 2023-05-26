@@ -17,7 +17,7 @@ class AppApi():
         self.api = Api(app, version='1.0', title='TodoMVC API',
             description='A simple TodoMVC API',
         )
-        self.api.add_namespace(msgRouter, path='/message')
+        self.api.add_namespace(msgRouter, path='/chat/message')
         jwt = JWTManager(app)
 
         # print router
