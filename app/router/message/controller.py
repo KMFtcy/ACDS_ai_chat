@@ -30,8 +30,8 @@ class MessageList(Resource):
     def post(self):
         message = api.payload["message"]
         user_id = get_jwt_identity()
-        new_message = msg_service.add_one_message(user_id, message).to_dict()
-        return response(data = new_message)
+        ai_reply = msg_service.add_one_message(user_id, message).to_dict()
+        return response(data = ai_reply)
  #
     # @api.response(201, 'User successfully created.')
     # @api.doc('create a new user')

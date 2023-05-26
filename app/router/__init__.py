@@ -6,6 +6,7 @@ import urllib
 
 from flask_jwt_extended import JWTManager
 logger = logging.getLogger("router")
+appConfig = None
 
 class AppApi():
     api = None
@@ -14,6 +15,7 @@ class AppApi():
         pass
 
     def init_api(self, app):
+        appConfig = app.config
         self.api = Api(app, version='1.0', title='TodoMVC API',
             description='A simple TodoMVC API',
         )

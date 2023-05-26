@@ -28,6 +28,10 @@ def create_app(flask_config_name=None):
 
     daoPool.init_app(app)
 
+    ## Service init
+    from app.service import context as serviceContext
+    serviceContext.init_app(app)
+
     ## Api init
     from app.router import appApi
     appApi.init_api(app)

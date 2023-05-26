@@ -7,3 +7,4 @@ flask_cors
 pymysql
 pyjwt
 flask_jwt_extended
+openai

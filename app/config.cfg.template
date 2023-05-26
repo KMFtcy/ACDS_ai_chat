@@ -13,3 +13,6 @@ DATABASE={
     "password": "password",
     "database": "ai_chat"
 }
+
+## Openai settings
+OPENAI_API_KEY = ""
