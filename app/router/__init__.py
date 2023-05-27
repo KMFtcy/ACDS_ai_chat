@@ -1,12 +1,13 @@
 from flask_restx import Api
 from flask import url_for
+from flask import Flask, request
+from flask_cors import CORS
 from app.router.message.controller import api as msgRouter
 import logging
 import urllib
 
 from flask_jwt_extended import JWTManager
 logger = logging.getLogger("router")
-appConfig = None
 
 class AppApi():
     api = None
@@ -22,6 +23,8 @@ class AppApi():
         self.api.add_namespace(msgRouter, path='/chat/message')
         jwt = JWTManager(app)
 
+        # Set CORS
+        CORS(app, supports_credentials=True)
         # print router
         for url in app.url_map.iter_rules():
             logger.info(url)
