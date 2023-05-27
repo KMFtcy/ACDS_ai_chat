@@ -34,7 +34,7 @@ def add_one_message(user_id,new_message):
         if o.author == "ai":
             role = "assistant"
         else:
-            role = "user"
+            role = "me"
         content = o.data
         one_message = {
             "role": role,
@@ -42,11 +42,11 @@ def add_one_message(user_id,new_message):
         }
         history.append(one_message)
     history.append({
-        "role": "user",
+        "role": "me",
         "content": new_message
     })
     ai_reply = get_reply_from_openai(user_id,history, new_message)
-    user_message_model = MessageModel(user_id=user_id,data = new_message,author="user")
+    user_message_model = MessageModel(user_id=user_id,data = new_message,author="me")
     sqlDAO.session.add(user_message_model)
     ai_message_model = MessageModel(user_id=user_id,data = ai_reply,author="ai")
     sqlDAO.session.add(ai_message_model)

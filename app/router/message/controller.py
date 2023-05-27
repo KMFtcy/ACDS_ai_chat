@@ -28,7 +28,7 @@ class MessageList(Resource):
     @api.doc("post_one_message")
     @jwt_required()
     def post(self):
-        message = api.payload["message"]
+        message = request.args.get("message[text]")
         user_id = get_jwt_identity()
         ai_reply = msg_service.add_one_message(user_id, message).to_dict()
         return response(data = ai_reply)
