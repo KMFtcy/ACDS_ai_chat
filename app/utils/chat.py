@@ -1,7 +1,5 @@
-
 import openai
 
-openai.api_key  = os.getenv('OPENAI_API_KEY')
 products = ""
 review = ""
 
@@ -52,9 +50,8 @@ def get_completion_from_messages(messages, model="gpt-3.5-turbo", temperature=0)
     return response.choices[0].message["content"]
 
 def collect_messages(history):
-    context = [context_header]
-    context.append(history)
+    context = context_header[:]
+    context.extend(history)
     response = get_completion_from_messages(context) 
     context.append({'role':'assistant', 'content':f"{response}"})
- 
     return response
