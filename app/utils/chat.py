@@ -3,6 +3,7 @@ import openai
 products = ""
 review = ""
 
+# TODO: define structure of product links in response
 context_header = [ {'role':'system', 'content':f"""
 
 You are ShoppingBot, an automated assistant to help consumers find ideal product in an on-line shopping mall. \
@@ -49,9 +50,10 @@ def get_completion_from_messages(messages, model="gpt-3.5-turbo", temperature=0)
 #     print(str(response.choices[0].message))
     return response.choices[0].message["content"]
 
+# history: [{'role':'string', 'content':"string"}]
+# response: "string"
 def collect_messages(history):
     context = context_header[:]
     context.extend(history)
     response = get_completion_from_messages(context) 
-    context.append({'role':'assistant', 'content':f"{response}"})
     return response
