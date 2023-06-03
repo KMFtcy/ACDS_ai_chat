@@ -8,7 +8,8 @@ from app.service import context
 from app.utils import chat
 
 sqlDAO = daoPool.sqlDAO
-openai.api_key  = context.config["OPENAI_API_KEY"]
+openai.api_key = context.config["OPENAI_API_KEY"]
+
 
 def get_user_messages(user_id):
     result = []
@@ -26,7 +27,8 @@ def get_user_messages(user_id):
         return e
     return result
 
-def add_one_message(user_id,new_message):
+
+def add_one_message(user_id, new_message):
     history = []
     query_result = MessageModel.query.filter_by(user_id=user_id).all()
     if len(query_result) == 0:
@@ -37,27 +39,24 @@ def add_one_message(user_id,new_message):
         else:
             role = "user"
         content = o.data
-        one_message = {
-            "role": role,
-            "content": content
-        }
+        one_message = {"role": role, "content": content}
         history.append(one_message)
-    history.append({
-        "role": "user",
-        "content": new_message
-    })
+    history.append({"role": "user", "content": new_message})
     ai_reply = chat.collect_messages(history)
-    user_message_model = MessageModel(user_id=user_id,data = new_message,author="me")
+    user_message_model = MessageModel(user_id=user_id, data=new_message, author="me")
     sqlDAO.session.add(user_message_model)
-    ai_message_model = MessageModel(user_id=user_id,data = ai_reply,author="ai")
+    ai_message_model = MessageModel(user_id=user_id, data=ai_reply, author="ai")
     sqlDAO.session.add(ai_message_model)
     sqlDAO.session.commit()
     return ai_message_model
 
+
 def insert_first_reply(user_id):
-    default_message = '''Hello! I am ShoppingBot, an automated assistant to help you find the ideal product in this online shopping mall. How can I assist you today? Would you like me to make a recommendation or summarize product reviews?
-    '''
-    first_message = MessageModel(user_id=user_id,data = default_message,author="ai")
+    default_message = """Hello! I am ShoppingBot, an automated assistant to help you find the ideal product in this online shopping mall. How can I assist you today? Would you like me to make a recommendation or summarize product reviews?
+    """
+    first_message = MessageModel(
+        user_id=user_id, data=default_message, seq_no=0, author="ai"
+    )
     sqlDAO.session.add(first_message)
     sqlDAO.session.commit()
     return first_message
