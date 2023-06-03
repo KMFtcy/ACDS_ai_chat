@@ -8,6 +8,7 @@ class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.String(80), nullable=False)
     type = db.Column(db.String(20), nullable=False)
+    seq_no = db.Column(db.Integer, nullable=False)
     author = db.Column(db.String(20), nullable=False)
     data = db.Column(db.String(1000), nullable=False)
     parms = db.Column(db.String(500))
