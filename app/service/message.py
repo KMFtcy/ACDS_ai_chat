@@ -35,7 +35,7 @@ def get_user_messages(user_id, latest_seq_string):
     return result
 
 
-def add_one_message(user_id, new_message):
+def add_one_message(user_id, new_message, latest_seq_num):
     history = []
     query_result = MessageModel.query.filter_by(user_id=user_id).all()
     if len(query_result) == 0:
@@ -50,9 +50,9 @@ def add_one_message(user_id, new_message):
         history.append(one_message)
     history.append({"role": "user", "content": new_message})
     ai_reply = chat.collect_messages(history)
-    user_message_model = MessageModel(user_id=user_id, data=new_message, author="me")
+    user_message_model = MessageModel(user_id=user_id, data=new_message, author="me",seq_num=latest_seq_num+1)
     sqlDAO.session.add(user_message_model)
-    ai_message_model = MessageModel(user_id=user_id, data=ai_reply, author="ai")
+    ai_message_model = MessageModel(user_id=user_id, data=ai_reply, author="ai",seq_num=latest_seq_num+2)
     sqlDAO.session.add(ai_message_model)
     sqlDAO.session.commit()
     return ai_message_model
