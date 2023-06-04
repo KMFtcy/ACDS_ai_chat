@@ -15,15 +15,16 @@ def get_user_messages(user_id, latest_seq):
     result = []
     try:
         query_result = (
-            MessageModel.query.filter_by(user_id=user_id)
+            sqlDAO.session.query(MessageModel)
+            .filter(MessageModel.user_id == user_id)
             .filter(MessageModel.seq_no > latest_seq)
             .all()
         )
         ## check if it is first request
-        if len(query_result) == 0 and latest_seq == 0:
-            logger.warn("No messages, first init.")
-            first_msg = insert_first_reply(user_id)
-            result.append(first_msg.to_dict())
+        if len(query_result) == 0 and int(latest_seq) == 0:
+                logger.warn("No messages, first init.")
+                first_msg = insert_first_reply(user_id)
+                result.append(first_msg.to_dict())
         else:
             for o in query_result:
                 result.append(o.to_dict())
