@@ -16,3 +16,6 @@ DATABASE={
 
 ## Openai settings
 OPENAI_API_KEY = ""
+
+## ACDS backend address
+BACKEND_URL = "http://localhost:1080"
