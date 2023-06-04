@@ -11,17 +11,18 @@ sqlDAO = daoPool.sqlDAO
 openai.api_key = context.config["OPENAI_API_KEY"]
 
 
-def get_user_messages(user_id, latest_seq):
+def get_user_messages(user_id, latest_seq_string):
+    latest_seq = int(latest_seq_string)
     result = []
     try:
         query_result = (
             sqlDAO.session.query(MessageModel)
             .filter(MessageModel.user_id == user_id)
-            .filter(MessageModel.seq_no > latest_seq)
+            .filter(MessageModel.seq_num > latest_seq)
             .all()
         )
         ## check if it is first request
-        if len(query_result) == 0 and int(latest_seq) == 0:
+        if len(query_result) == 0 and latest_seq == 0:
                 logger.warn("No messages, first init.")
                 first_msg = insert_first_reply(user_id)
                 result.append(first_msg.to_dict())
@@ -61,7 +62,7 @@ def insert_first_reply(user_id):
     default_message = """Hello! I am ShoppingBot, an automated assistant to help you find the ideal product in this online shopping mall. How can I assist you today? Would you like me to make a recommendation or summarize product reviews?
     """
     first_message = MessageModel(
-        user_id=user_id, data=default_message, seq_no=1, author="ai"
+        user_id=user_id, data=default_message, seq_num=1, author="ai"
     )
     sqlDAO.session.add(first_message)
     sqlDAO.session.commit()
