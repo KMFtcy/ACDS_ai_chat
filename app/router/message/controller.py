@@ -21,8 +21,9 @@ class MessageList(Resource):
     def get(self):
         """List all registered users"""
         user_id = get_jwt_identity()
+        latest_seq = request.args.get("seq")
         # access_token = create_access_token(identity=user_id)
-        result = msg_service.get_user_messages(user_id)
+        result = msg_service.get_user_messages(user_id,latest_seq)
         return response(data = result)
 
     @api.doc("post_one_message")
