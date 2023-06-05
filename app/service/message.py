@@ -19,9 +19,10 @@ def get_user_messages(user_id, latest_seq_string):
             sqlDAO.session.query(MessageModel)
             .filter(MessageModel.user_id == user_id)
             .filter(MessageModel.seq_num > latest_seq)
+            .filter(MessageModel.type != "prompt") # We don't return prompt information to frontend
             .all()
         )
-        ## check if it is first request
+        # check if it is the first request
         if len(query_result) == 0 and latest_seq == 0:
                 logger.warn("No messages, first init.")
                 first_msg = insert_first_reply(user_id)
@@ -37,9 +38,12 @@ def get_user_messages(user_id, latest_seq_string):
 
 def add_one_message(user_id, new_message, latest_seq_num):
     history = []
+    # get all messages
     query_result = MessageModel.query.filter_by(user_id=user_id).all()
+    # prevent the user chat without init
     if len(query_result) == 0:
         raise Exception("The user does not chat before, should login first.")
+    # create history list
     for o in query_result:
         if o.author == "ai":
             role = "assistant"
@@ -49,7 +53,9 @@ def add_one_message(user_id, new_message, latest_seq_num):
         one_message = {"role": role, "content": content}
         history.append(one_message)
     history.append({"role": "user", "content": new_message})
+    # call openai interface
     ai_reply = chat.collect_messages(history)
+    # obtain the reply and add to database
     user_message_model = MessageModel(user_id=user_id, data=new_message, author="me",seq_num=latest_seq_num+1)
     sqlDAO.session.add(user_message_model)
     ai_message_model = MessageModel(user_id=user_id, data=ai_reply, author="ai",seq_num=latest_seq_num+2)
