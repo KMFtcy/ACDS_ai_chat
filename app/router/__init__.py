@@ -3,6 +3,7 @@ from flask import url_for
 from flask import Flask, request
 from flask_cors import CORS
 from app.router.message.controller import api as msgRouter
+from app.router.user_behave.controller import api as behaveRouter
 import logging
 import urllib
 
@@ -20,7 +21,8 @@ class AppApi():
         self.api = Api(app, version='1.0', title='TodoMVC API',
             description='A simple TodoMVC API',
         )
-        self.api.add_namespace(msgRouter, path='/chat/message')
+        self.api.add_namespace(msgRouter, path='/chat')
+        self.api.add_namespace(behaveRouter, path='/behaviour')
         jwt = JWTManager(app)
 
         # Set CORS

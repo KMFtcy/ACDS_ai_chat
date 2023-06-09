@@ -13,7 +13,7 @@ model = ApiModel(api)
 # logger = logging.getLogger("router")
 
 
-@api.route("/")
+@api.route("/message")
 class MessageList(Resource):
     @api.doc("list_of_messages")
     # @api.marshal_list_with(_user, envelope='data')
