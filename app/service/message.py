@@ -6,6 +6,7 @@ from app.service import logger
 from app.dao import daoPool
 from app.service import context
 from app.utils import chat
+from app.service import user_bahave as behavior_service
 
 sqlDAO = daoPool.sqlDAO
 openai.api_key = context.config["OPENAI_API_KEY"]
@@ -53,8 +54,10 @@ def add_one_message(user_id, new_message, latest_seq_num):
         one_message = {"role": role, "content": content}
         history.append(one_message)
     history.append({"role": "user", "content": new_message})
+    # get user behaviour records
+    behaviour_records = behavior_service.get_user_behaviour(user_id)
     # call openai interface
-    ai_reply = chat.collect_messages(history)
+    ai_reply = chat.collect_messages(behaviour_records, history)
     # obtain the reply and add to database
     user_message_model = MessageModel(user_id=user_id, data=new_message, author="me",seq_num=latest_seq_num+1)
     sqlDAO.session.add(user_message_model)
