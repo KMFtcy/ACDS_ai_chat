@@ -1,4 +1,5 @@
 from app.dao import daoPool
+from sqlalchemy import Text
 from sqlalchemy.sql import func
 
 db = daoPool.sqlDAO
@@ -10,7 +11,7 @@ class Message(db.Model):
     type = db.Column(db.String(20), nullable=False)
     seq_num = db.Column(db.Integer, nullable=False)
     author = db.Column(db.String(20), nullable=False)
-    data = db.Column(db.String(1000), nullable=False)
+    data = db.Column(Text, nullable=False)
     parms = db.Column(db.String(500))
     created_at = db.Column(db.TIMESTAMP, server_default=func.now())
     update_time = db.Column(db.DateTime, server_default=func.now(), onupdate=func.now())
