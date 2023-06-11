@@ -66,13 +66,7 @@ def get_header(review, behavior, user_on_the_product_page):
     
         if {user_on_the_product_page != True }:
         
-            ask the user to open a product page/provide a product id.
-        
-            Then summarize the product reviews: ```{review}```
-        
-            Give a detailed summarize for positive reviews.Please list five of the positive reviews.
-    
-            The summarize is intended for customers. So please also give a detailed recommendation on what kind of customers is this product suitable for.
+            apologize to user that user need to open a product page and then you could summarize product review for user.
 
     Then, you ask is there anything you could help. 
 
