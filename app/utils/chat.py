@@ -15,8 +15,7 @@ def init_products(path):
     products=products.loc[:,["goods_name","intro","price","selling_point"]]
     return
 
-def get_header(review, behavior):
-    # TODO: define structure of product links in response
+def get_header(review, behavior, user_on_the_product_page):
     context_header = [ {'role':'system', 'content':f"""
 
    You are ShoppingBot, an automated assistant to help consumers find ideal product in an on-line shopping mall. 
@@ -94,7 +93,8 @@ def get_completion_from_messages(messages, model="gpt-3.5-turbo", temperature=0)
 # response: "string"
 def collect_messages(behaviour_records, history):
     # generate header
-    context_header = get_header("",behaviour_records)
+    # TODO: use real reviews and "user_on_the_product_page_data" data
+    context_header = get_header("",behaviour_records, False)
     # get messages
     context = context_header[:]
     context.extend(history)
