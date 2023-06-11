@@ -37,7 +37,7 @@ def get_user_messages(user_id, latest_seq_string):
     return result
 
 
-def add_one_message(user_id, new_message, latest_seq_num):
+def add_one_message(user_id, new_message, latest_seq_num,user_location):
     history = []
     # get all messages
     query_result = MessageModel.query.filter_by(user_id=user_id).all()
@@ -57,7 +57,11 @@ def add_one_message(user_id, new_message, latest_seq_num):
     # get user behaviour records
     behaviour_records = behavior_service.get_user_behaviour(user_id)
     # call openai interface
-    ai_reply = chat.collect_messages(behaviour_records, history)
+    isUserReadDetail = False
+    if (user_location == "/goodsDetail"):
+        isUserReadDetail = True
+    # TODO: if user is reading details, get reviews
+    ai_reply = chat.collect_messages(behaviour_records, history,isUserReadDetail)
     # obtain the reply and add to database
     user_message_model = MessageModel(user_id=user_id, data=new_message, author="me",seq_num=latest_seq_num+1)
     sqlDAO.session.add(user_message_model)

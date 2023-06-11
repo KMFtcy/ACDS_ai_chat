@@ -85,10 +85,10 @@ def get_completion_from_messages(messages, model="gpt-3.5-turbo", temperature=0)
 
 # history: [{'role':'string', 'content':"string"}]
 # response: "string"
-def collect_messages(behaviour_records, history):
+def collect_messages(behaviour_records, history, isUserReadDetail=False):
     # generate header
     # TODO: use real reviews and "user_on_the_product_page_data" data
-    context_header = get_header("",behaviour_records, False)
+    context_header = get_header("",behaviour_records, isUserReadDetail)
     # get messages
     context = context_header[:]
     context.extend(history)
