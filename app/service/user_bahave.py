@@ -15,6 +15,7 @@ def get_user_behaviour(user_id):
         query_result = (
             sqlDAO.session.query(BehaviourModel)
             .filter(BehaviourModel.user_id == user_id)
+            .filter(BehaviourModel.type == "view")
             .all()
         )
         for o in query_result:
