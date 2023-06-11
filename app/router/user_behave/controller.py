@@ -14,7 +14,7 @@ model = ApiModel(api)
 
 
 @api.route("/")
-class MessageList(Resource):
+class Behaviour(Resource):
     @api.doc("list_of_one_user_behaviour")
     # @api.marshal_list_with(_user, envelope='data')
     @jwt_required()
