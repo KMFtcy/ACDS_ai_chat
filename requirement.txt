@@ -8,3 +8,4 @@ pymysql
 pyjwt
 flask_jwt_extended
 openai
+pandas

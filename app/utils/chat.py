@@ -1,7 +1,19 @@
 import openai
+import pandas as pd
+import sys
+import os
 
 global products
 products = ""
+
+def init_products(path):
+    # check if file exists
+    if not os.path.exists(path):
+        sys.exit("products data file not exists")
+    # products data should include the product data of the whole online shopping mall. 
+    products=pd.read_csv(path)
+    products=products.loc[:,["goods_name","intro","price","selling_point"]]
+    return
 
 def get_header(review, behavior):
     # TODO: define structure of product links in response

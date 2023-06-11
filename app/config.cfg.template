@@ -19,3 +19,6 @@ OPENAI_API_KEY = ""
 
 ## ACDS backend address
 BACKEND_URL = "http://localhost:1080"
+
+## ACDS products data path
+ACDS_PRODUCT_DATA_PATH = ""
