@@ -1,4 +1,5 @@
 import openai
+import json
 import requests
 
 from app.model.message import Message as MessageModel
@@ -12,6 +13,18 @@ sqlDAO = daoPool.sqlDAO
 openai.api_key = context.config["OPENAI_API_KEY"]
 
 
+def get_product_reviews(product_id):
+    acds_backend_url = context.config["BACKEND_URL"]
+    response = requests.get(
+        acds_backend_url
+        + "buyer/member/evaluation/"
+        + product_id
+        + "/goodsEvaluation?pageNumber=1&pageSize=5000&grade=&goodsId="
+        + product_id
+    )
+    return response.json()["result"]["records"]
+
+
 def get_user_messages(user_id, latest_seq_string):
     latest_seq = int(latest_seq_string)
     result = []
@@ -20,14 +33,16 @@ def get_user_messages(user_id, latest_seq_string):
             sqlDAO.session.query(MessageModel)
             .filter(MessageModel.user_id == user_id)
             .filter(MessageModel.seq_num > latest_seq)
-            .filter(MessageModel.type != "prompt") # We don't return prompt information to frontend
+            .filter(
+                MessageModel.type != "prompt"
+            )  # We don't return prompt information to frontend
             .all()
         )
         # check if it is the first request
         if len(query_result) == 0 and latest_seq == 0:
-                logger.warn("No messages, first init.")
-                first_msg = insert_first_reply(user_id)
-                result.append(first_msg.to_dict())
+            logger.warn("No messages, first init.")
+            first_msg = insert_first_reply(user_id)
+            result.append(first_msg.to_dict())
         else:
             for o in query_result:
                 result.append(o.to_dict())
@@ -37,7 +52,9 @@ def get_user_messages(user_id, latest_seq_string):
     return result
 
 
-def add_one_message(user_id, new_message, latest_seq_num,user_location):
+def add_one_message(
+    user_id, new_message, latest_seq_num, user_location, location_query
+):
     history = []
     # get all messages
     query_result = MessageModel.query.filter_by(user_id=user_id).all()
@@ -58,14 +75,24 @@ def add_one_message(user_id, new_message, latest_seq_num,user_location):
     behaviour_records = behavior_service.get_user_behaviour(user_id)
     # call openai interface
     isUserReadDetail = False
-    if (user_location == "/goodsDetail"):
+    reviews = {}
+    if user_location == "/goodsDetail":
         isUserReadDetail = True
+    if isUserReadDetail:
+        query = json.loads(location_query)
+        reviews = get_product_reviews(query["goodsId"])
     # TODO: if user is reading details, get reviews
-    ai_reply = chat.collect_messages(behaviour_records, history,isUserReadDetail)
+    ai_reply = chat.collect_messages(
+        reviews, behaviour_records, history, isUserReadDetail
+    )
     # obtain the reply and add to database
-    user_message_model = MessageModel(user_id=user_id, data=new_message, author="me",seq_num=latest_seq_num+1)
+    user_message_model = MessageModel(
+        user_id=user_id, data=new_message, author="me", seq_num=latest_seq_num + 1
+    )
     sqlDAO.session.add(user_message_model)
-    ai_message_model = MessageModel(user_id=user_id, data=ai_reply, author="ai",seq_num=latest_seq_num+2)
+    ai_message_model = MessageModel(
+        user_id=user_id, data=ai_reply, author="ai", seq_num=latest_seq_num + 2
+    )
     sqlDAO.session.add(ai_message_model)
     sqlDAO.session.commit()
     return ai_message_model

@@ -32,9 +32,10 @@ class MessageList(Resource):
         message = request.args.get("message[text]")
         last_seq_string = request.args.get("last_seq")
         user_location = request.args.get("location")
+        location_query = request.args.get("location_query")
         last_seq = int(last_seq_string)
         user_id = get_jwt_identity()
-        ai_reply = msg_service.add_one_message(user_id, message,last_seq,user_location).to_dict()
+        ai_reply = msg_service.add_one_message(user_id, message,last_seq,user_location,location_query).to_dict()
         return response(data = ai_reply)
  #
     # @api.response(201, 'User successfully created.')
