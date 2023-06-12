@@ -69,6 +69,8 @@ def get_header(review, behavior, user_on_the_product_page):
             apologize to user that user need to open a product page and then you could summarize product review for user.
 
     Then, you ask is there anything you could help. 
+    
+    Please limit your response in 200 words.
 
     """} ]  # accumulate messages
     return context_header
