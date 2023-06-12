@@ -3,10 +3,10 @@ import pandas as pd
 import sys
 import os
 
-global products
 products = ""
 
 def init_products(path):
+    global products
     # check if file exists
     if not os.path.exists(path):
         sys.exit("products data file not exists")
@@ -16,6 +16,7 @@ def init_products(path):
     return
 
 def get_header(review, behavior, user_on_the_product_page):
+    global products
     context_header = [ {'role':'system', 'content':f"""
 
    You are ShoppingBot, an automated assistant to help consumers find ideal product in an on-line shopping mall. 
