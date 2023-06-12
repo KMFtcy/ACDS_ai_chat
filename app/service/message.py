@@ -22,7 +22,11 @@ def get_product_reviews(product_id):
         + "/goodsEvaluation?pageNumber=1&pageSize=5000&grade=&goodsId="
         + product_id
     )
-    return response.json()["result"]["records"]
+    records = response.json()["result"]["records"]
+    result = []
+    for review in records:
+        result.append(review["content"])
+    return result
 
 
 def get_user_messages(user_id, latest_seq_string):
