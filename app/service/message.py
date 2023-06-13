@@ -77,6 +77,13 @@ def add_one_message(
     history.append({"role": "user", "content": new_message})
     # get user behaviour records
     behaviour_records = behavior_service.get_user_behaviour(user_id)
+    behaviour = []
+    for record in behaviour_records:
+        item = {
+            "type" : record.type,
+            "data": record.data
+        }
+        behaviour.append(item)
     # call openai interface
     isUserReadDetail = False
     reviews = {}
@@ -87,7 +94,7 @@ def add_one_message(
         reviews = get_product_reviews(query["goodsId"])
     # TODO: if user is reading details, get reviews
     ai_reply = chat.collect_messages(
-        reviews, behaviour_records, history, isUserReadDetail
+        reviews, behaviour, history, isUserReadDetail
     )
     # obtain the reply and add to database
     user_message_model = MessageModel(
