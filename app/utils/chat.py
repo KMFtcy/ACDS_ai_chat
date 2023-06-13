@@ -40,7 +40,7 @@ if want you to make a recommendation:
     
     Your recommendation should not be beyond what the shopping mall have. 
     
-    And the format of your recommendation result should be "Click to the products: {{prefix}}/goodsDetail?goodsId=<<id>>{{postfix}}" where id should be from the product sheet.
+    And the format of your recommendation result should be "Click to the products: (%prefix%)/goodsDetail?goodsId=<<id>>(%postfix%)" where id should be from the product sheet.
     You should not change anything in the format except substituting the id.
     And then you explain recommendation reason.
 
