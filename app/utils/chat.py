@@ -41,7 +41,7 @@ if want you to make a recommendation:
     Your recommendation should not be beyond what the shopping mall have. 
     
     And the format of your recommendation result should be "Click to the products: (%prefix%)/goodsDetail?goodsId=<<id>>(%postfix%)" where id should be from the product sheet.
-    You should not change anything in the format except substituting the id.
+    You should not omit the % and () in the format.
     And then you explain recommendation reason.
 
     If the user ask you anything beyond the products, please tell them we don't have this product.
