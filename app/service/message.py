@@ -80,8 +80,8 @@ def add_one_message(
     behaviour = []
     for record in behaviour_records:
         item = {
-            "type" : record.type,
-            "data": record.data
+            "type" : record["type"],
+            "data": record["data"],
         }
         behaviour.append(item)
     # call openai interface
