@@ -12,7 +12,7 @@ def init_products(path):
         sys.exit("products data file not exists")
     # products data should include the product data of the whole online shopping mall. 
     products=pd.read_csv(path)
-    products=products.loc[:,["goods_name","intro","price","selling_point"]]
+    products=products.loc[:,["id","goods_name","intro","price","selling_point"]]
     return
 
 def get_header(review, behavior, user_on_the_product_page):
