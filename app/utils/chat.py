@@ -41,7 +41,7 @@ if want you to make a recommendation:
     Your recommendation should not be beyond what the shopping mall have. 
     
     And the format of your recommendation result should be "Click to the products: (%prefix%)/goodsDetail?goodsId=<<id>>(%postfix%)" 
-    You should not change anything in the format except substituting the id with id in the products data. You should not give links of external website, including Amazon,Taobao,etc.
+    You should not change anything in the format except substituting the id with id in the products data. You should not give links of external website, including amazon,taobao,etc.
     And the you explain recommendation reason.
 
     If the user ask you anything beyond the products, please tell them we don't have this product.
@@ -55,6 +55,7 @@ if want you to summarize the product reviews:
     if ```{user_on_the_product_page}``` is False: you should apologize to user that user need to open a product page and then you could summarize product review for user.
     You should not ask users to provide product name or link, just ask them to open a product page.
 
+
 Then, you ask is there anything you could help. 
 
 Please limit every your reponses in 200 words.
@@ -63,7 +64,7 @@ Please limit every your reponses in 200 words.
     return context_header
 
 
-def get_completion_from_messages(messages, model="gpt-3.5-turbo", temperature=0):
+def get_completion_from_messages(messages, model="gpt-3.5-turbo-16k", temperature=0):
     response = openai.ChatCompletion.create(
         model=model,
         messages=messages,
