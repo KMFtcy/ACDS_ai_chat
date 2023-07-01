@@ -72,8 +72,12 @@ def collect_messages(reviews, behaviour_records, history, isUserReadDetail=False
     context.extend(history)
     # if user is locate in product detail page, add reviews to chat
     if isUserReadDetail:
-        review_chat = {'role':'user', 'content':f"""
-        I am now located at the product page, the reviews of products are: ```{reviews}```
+        review_chat = {'role':'system', 'content':f"""
+        if want you to summarize the product reviews:
+        product reviews: ```{review}```
+        You should give a brief summarize for positive reviews based on the reviews.  
+        The summary is intended for customers. So you should give a short recommendation on what kind of customers is this product suitable for. 
+        The summary should not exceed 50 words.
         """}
         context.append(review_chat)
     response = get_completion_from_messages(context) 
