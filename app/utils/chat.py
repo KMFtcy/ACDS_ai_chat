@@ -74,7 +74,7 @@ def collect_messages(reviews, behaviour_records, history, isUserReadDetail=False
     if isUserReadDetail:
         review_chat = {'role':'system', 'content':f"""
         if users want you to summarize the product reviews:
-        product reviews: ```{review}```
+        product reviews: ```{reviews}```
         You should give a brief summarize for positive reviews based on the reviews.  
         The summary is intended for customers. So you should give a short recommendation on what kind of customers this product is suitable for. 
         The summary should not exceed 50 words.
