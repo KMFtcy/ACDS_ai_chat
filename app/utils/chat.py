@@ -15,7 +15,7 @@ def init_products(path):
     products=products.loc[:,["id","goods_name","intro","price","selling_point"]]
     return
 
-def get_header(review, behavior, user_on_the_product_page):
+def get_header(behavior):
     global products
     context_header = [ {'role':'system', 'content':f"""
 You are ShoppingBot, an automated assistant to help consumers find ideal product in an on-line shopping mall. \
@@ -44,16 +44,6 @@ if want you to make a recommendation:
     And the you explain recommendation reason.
 
     If the user ask you anything beyond the products, please tell them we don't have this product.
-    
-if want you to summarize the product reviews:
-    
-    if ```{user_on_the_product_page}``` is True: You should summarize the given product reviews:```{review}```. and give a brief summarize for positive reviews.
-    The summary is intended for customers. So you should give a short recommendation on what kind of customers this product is suitable for. 
-    The summary should not exceed 50 words.
-    
-    if ```{user_on_the_product_page}``` is False: you should apologize to user that user need to open a product page and then you could summarize product review for user.
-    You should not ask users to provide product name or link, just ask them to open a product page.
-
 
 Then, you ask is there anything you could help. 
 
@@ -76,9 +66,15 @@ def get_completion_from_messages(messages, model="gpt-3.5-turbo-16k", temperatur
 # response: "string"
 def collect_messages(reviews, behaviour_records, history, isUserReadDetail=False):
     # generate header
-    context_header = get_header(reviews,behaviour_records, isUserReadDetail)
+    context_header = get_header(behaviour_records)
     # get messages
     context = context_header[:]
     context.extend(history)
+    # if user is locate in product detail page, add reviews to chat
+    if isUserReadDetail:
+        review_chat = {'role':'user', 'content':f"""
+        I am now located at the product page, the reviews of products are: ```{reviews}```
+        """}
+        context.append(review_chat)
     response = get_completion_from_messages(context) 
     return response
