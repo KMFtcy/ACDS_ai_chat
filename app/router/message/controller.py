@@ -37,6 +37,13 @@ class MessageList(Resource):
         user_id = get_jwt_identity()
         ai_reply = msg_service.add_one_message(user_id, message,last_seq,user_location,location_query).to_dict()
         return response(data = ai_reply)
+
+    @api.doc("delete all messages")
+    @jwt_required()
+    def delete(self):
+        user_id = get_jwt_identity()
+        msg_service.delete_all_messages(user_id)
+        return response(data = "success")
  #
     # @api.response(201, 'User successfully created.')
     # @api.doc('create a new user')

@@ -118,3 +118,8 @@ def insert_first_reply(user_id):
     sqlDAO.session.add(first_message)
     sqlDAO.session.commit()
     return first_message
+
+def delete_all_messages(user_id):
+    MessageModel.query.filter(MessageModel.user_id == int(user_id)).delete()
+    sqlDAO.session.commit()
+    return True
