@@ -79,6 +79,6 @@ def collect_messages(reviews, behaviour_records, history, isUserReadDetail=False
         The summary is intended for customers. So you should give a short recommendation on what kind of customers this product is suitable for. 
         The summary should not exceed 50 words.
         """}
-        context.append(review_chat)
+        context.insert(-1,review_chat)
     response = get_completion_from_messages(context) 
     return response
