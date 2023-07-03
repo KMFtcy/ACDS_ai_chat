@@ -40,7 +40,7 @@ if want you to make a recommendation:
     Give the recommendation immediately and don't ask the user to wait for you to recommend.
     
     And the format of your recommendation result should be "Click to the products: (%prefix%)/goodsDetail?goodsId=<<id>>(%postfix%)" 
-    You should not change anything in the format except substituting the id with id in the products data. You should not give links of external website, including amazon,taobao,etc.
+    This is a fixed format and you should not change anything except substituting the id with id in the products data. You should not give links of external website, including amazon,taobao,etc.
     And the you explain recommendation reason.
 
     If the user ask you anything beyond the products, please tell them we don't have this product.
