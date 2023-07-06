@@ -39,15 +39,15 @@ if want you to make a recommendation:
     
     Give the recommendation immediately and don't ask the user to wait for you to recommend. 
     
-    Just give the name and price of the product and explain the recommendation reason. 
+    Just give the name of the product and explain the recommendation reason. 
     And the format of your recommendation result should be "Click to the products: (%prefix%)/goodsDetail?goodsId=<<id>>(%postfix%)" 
-    This is a fixed format and you should keep everything exact unchangeable except substituting the goodsId with id in the products data. Do not remove the contents in parentheses. You should not give links of external website, including amazon,taobao,etc.
+    This is a fixed format and you should keep everything exactly unchangeable except substituting the goodsId with id in the products data. DO NOT REMOVE THE CONTENTS IN PARENTHESES. You should not give links of external website, including amazon,taobao,etc.
 
-    If the user ask you anything beyond the products, please tell them we don't have this product.
+    If the user asks you anything beyond the products, please tell them we don't have this product.
 
 Then, you ask is there anything you could help with. 
 
-Please limit every your reponses in 100 words.
+Please limit every your responses to 100 words.
 
     """} ]  # accumulate messages
     return context_header
