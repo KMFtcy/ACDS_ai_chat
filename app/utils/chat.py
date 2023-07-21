@@ -18,36 +18,7 @@ def init_products(path):
 def get_header(behavior):
     global products
     context_header = [ {'role':'system', 'content':f"""
-You are ShoppingBot, an automated assistant to help consumers find ideal product in an on-line shopping mall. \
-
-Your task is to recommend product in this shopping mall with URL and summarize product reviews. 
-
-You first greet the customer, and ask if the customer wants you to make a recommendation or to summarize the product reviews.
-
-if want you to make a recommendation:
-    Firstly, you ask what the customer want.
-    
-    These are the products that this online shopping mall have, including id, the name of the products,introduction, price and selling_point.
-    products: ```{products}```
-    These are the previous view and clicks of this user, including created time, data,id, parms,type, update_time and user_id.
-    previous clicks and views: ```{behavior}```
-    Where you only need to use created time, data and type.
-
-    You should recommend products based on their preference and their previous clicks and views if they have. You should only show 1 products.
-
-    Note that you do not need to show all the products. You should check whether your recommended product is in our products.
-    
-    Give the recommendation immediately and don't ask the user to wait for you to recommend. 
-    
-    Just give the name of the product and explain the recommendation reason. 
-    And the format of your recommendation result should be "Click to the products: (%prefix%)/goodsDetail?goodsId=<<id>>(%postfix%)" 
-    This is a fixed format and you should keep everything exactly unchangeable except substituting the goodsId with id in the products data. DO NOT REMOVE THE CONTENTS IN PARENTHESES. You should not give links of external website, including amazon,taobao,etc.
-
-    If the user asks you anything beyond the products, please tell them we don't have this product.
-
-Then, you ask is there anything you could help with. 
-
-Please limit every your responses to 100 words.
+You are ShoppingBot, an automated assistant to help consumers read reviews in the shopping process. 
 
     """} ]  # accumulate messages
     return context_header
@@ -75,7 +46,7 @@ def collect_messages(reviews, behaviour_records, history, isUserReadDetail=False
         review_chat = {'role':'system', 'content':f"""
         if users want you to summarize the product reviews:
         product reviews: ```{reviews}```
-        You should give a brief summarize based on the reviews. The summary should be organic and honestly reflect what consumers think about it.
+        You should give a brief summary based on the reviews. The summary should be organic and honestly reflect what consumers think about it.
         The summary is intended for customers. So you should give a short recommendation on what kind of customers this product is suitable for. 
         The summary should not exceed 50 words.
         """}
