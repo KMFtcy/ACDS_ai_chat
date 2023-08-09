@@ -47,7 +47,8 @@ def collect_messages(reviews, behaviour_records, history, isUserReadDetail=False
         if users want you to summarize the product reviews:
         product reviews: ```{reviews}```
         You should give a brief summary based on the reviews. The summary should be organic and honestly reflect what consumers think about it.
-        The summary is intended for customers. So you should give a short recommendation on what kind of customers this product is suitable for. 
+        The summary is intended for customers. So you should give a short recommendation on what kind of customers this product is suitable for if the reviews are generally positive. If all reviews are negative, don't recommend it. 
+        Your summary should be consistent with the content and emotion directions of the reviews. Don't input your subjective emotions and don't make things up.
         The summary should not exceed 50 words.
         """}
         context.insert(-1,review_chat)
