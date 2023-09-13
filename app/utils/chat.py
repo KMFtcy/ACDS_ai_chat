@@ -44,11 +44,14 @@ def collect_messages(reviews, behaviour_records, history, isUserReadDetail=False
     # if user is locate in product detail page, add reviews to chat
     if isUserReadDetail:
         review_chat = {'role':'system', 'content':f"""
-        if users want you to summarize the product reviews:
+        First, determine whether the question of users belongs to the recommendation category or reviews-related category:
+        1. if users want you to recommend a product: tell them you do not have the ability to recommend yet. You should not give any links or information from external information.
+        2. if users want you to summarize the product reviews or ask you questions about reviews:
         product reviews: ```{reviews}```
-        You should give a brief summary based on the reviews. The summary should be organic and honestly reflect what consumers think about it. 
-        Your summary should be consistent with the content and emotion directions of the reviews. Don't input your subjective emotions and don't make things up.
-        The summary should not exceed 50 words.
+        if you need to summarize reviews, you should give a brief summary based on the reviews. The summary should be organic and honestly reflect what consumers think about it. 
+        Your summary should be consistent with the content and emotional directions of the reviews. Don't input your subjective emotions and don't make things up.
+        if you need to answer questions about reviews, your answer should also be consistent with the reviews.
+        Your summary and answer should not exceed 50 words.
         """}
         context.insert(-1,review_chat)
     response = get_completion_from_messages(context) 
