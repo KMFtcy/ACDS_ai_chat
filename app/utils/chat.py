@@ -45,13 +45,15 @@ def collect_messages(reviews, behaviour_records, history, isUserReadDetail=False
     if isUserReadDetail:
         review_chat = {'role':'system', 'content':f"""
         First, determine whether the question of users belongs to the recommendation category or reviews-related category:
-        1. if users want you to recommend a product: tell them you do not have the ability to recommend yet. You should not give any links or information from external information.
-        2. if users want you to summarize the product reviews or ask you questions about reviews:
+        1. if users want you to recommend a product,you should base on the following information: 
+        product lists:```{products}```
+        You should not give any links or information from external information.
+        2. if users want you to summarize the product reviews or ask you questions about reviews,you should based on the following information:
+        product information: ```{description}```
         product reviews: ```{reviews}```
-        if you need to summarize reviews, you should give a brief summary based on the reviews. The summary should be organic and honestly reflect what consumers think about it. 
-        Your summary should be consistent with the content and emotional directions of the reviews. Don't input your subjective emotions and don't make things up.
-        if you need to answer questions about reviews, your answer should also be consistent with the reviews.
-        Your summary and answer should not exceed 50 words.
+        if you need to summarize reviews, you should give a brief summary based on the reviews. You first tell them the overall rate, and then summarize the information. The summary should be organic and honestly reflect what consumers think about it. 
+        Your summary should be consistent with the content and emotional directions of the reviews. Don't make things up.
+        Your summary and answer should not exceed 50 words. Avoid repetition of "As an AI-based assistant/language model","I don't have real-time reviews".
         """}
         context.insert(-1,review_chat)
     response = get_completion_from_messages(context) 
