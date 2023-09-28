@@ -12,7 +12,11 @@ def init_products(path):
         sys.exit("products data file not exists")
     # products data should include the product data of the whole online shopping mall. 
     products=pd.read_csv(path,sep = '\t')
-    products=products.loc[:,["id","goods_name","intro","price","selling_point"]]
+    products=products.loc[:,["id","goods_name","intro","price","selling_point", "sku_id"]]
+    # add recommend link
+    products["recommend_link"] = ""
+    for index, row in products.iterrows():
+        products.at[index, 'recommend_link'] = "http://106.52.209.141:18081/goodsDetail?goodsId="+ row ["id"]+"&defaultSkuId=" + str(row["sku_id"])
     return
 
 def get_header(behavior):
