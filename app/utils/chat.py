@@ -11,7 +11,7 @@ def init_products(path):
     if not os.path.exists(path):
         sys.exit("products data file not exists")
     # products data should include the product data of the whole online shopping mall. 
-    products=pd.read_csv(path)
+    products=pd.read_csv(path,sep = '\t')
     products=products.loc[:,["id","goods_name","intro","price","selling_point"]]
     return
 
@@ -35,7 +35,7 @@ def get_completion_from_messages(messages, model="gpt-3.5-turbo-16k", temperatur
 
 # history: [{'role':'string', 'content':"string"}]
 # response: "string"
-def collect_messages(reviews, behaviour_records, history, isUserReadDetail=False):
+def collect_messages( description, reviews, behaviour_records, history, isUserReadDetail=False):
     # generate header
     context_header = get_header(behaviour_records)
     # get messages

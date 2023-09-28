@@ -12,12 +12,23 @@ from app.service import user_bahave as behavior_service
 sqlDAO = daoPool.sqlDAO
 openai.api_key = context.config["OPENAI_API_KEY"]
 
+def get_product_detail(product_id,sku_id):
+    acds_backend_url = context.config["BACKEND_URL"]
+    response = requests.get(
+        acds_backend_url
+        + "/buyer/goods/goods/sku/"
+        + product_id
+        + "/"
+        + sku_id
+    )
+    data = response.json()["result"]["data"]
+    return data
 
 def get_product_reviews(product_id):
     acds_backend_url = context.config["BACKEND_URL"]
     response = requests.get(
         acds_backend_url
-        + "buyer/member/evaluation/"
+        + "/buyer/member/evaluation/"
         + product_id
         + "/goodsEvaluation?pageNumber=1&pageSize=5000&grade=&goodsId="
         + product_id
@@ -92,9 +103,10 @@ def add_one_message(
     if isUserReadDetail:
         query = json.loads(location_query)
         reviews = get_product_reviews(query["goodsId"])
+        product_detail = get_product_detail(query["goodsId"],query["defaultSkuId"])
     # TODO: if user is reading details, get reviews
     ai_reply = chat.collect_messages(
-        reviews, behaviour, history, isUserReadDetail
+        product_detail, reviews, behaviour, history, isUserReadDetail
     )
     # obtain the reply and add to database
     user_message_model = MessageModel(
