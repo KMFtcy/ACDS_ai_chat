@@ -16,7 +16,7 @@ def get_product_detail(product_id,sku_id):
     acds_backend_url = context.config["BACKEND_URL"]
     response = requests.get(
         acds_backend_url
-        + "/buyer/goods/goods/sku/"
+        + "buyer/goods/goods/sku/"
         + product_id
         + "/"
         + sku_id
@@ -28,7 +28,7 @@ def get_product_reviews(product_id):
     acds_backend_url = context.config["BACKEND_URL"]
     response = requests.get(
         acds_backend_url
-        + "/buyer/member/evaluation/"
+        + "buyer/member/evaluation/"
         + product_id
         + "/goodsEvaluation?pageNumber=1&pageSize=5000&grade=&goodsId="
         + product_id
