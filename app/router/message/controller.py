@@ -60,9 +60,8 @@ class TestApi(Resource):
     @api.expect(model.postModel, validate=True)
     @jwt_required()
     def get(self):
-        print("get it")
-        print(api.payload)
-        print("read it")
+        rating = msg_service.get_product_rating("B0002F513E","1440957997408449281")
+        print(rating)
         return response(data = "result")
 # @api.route('/<public_id>')
 # @api.param('public_id', 'The User identifier')
