@@ -27,7 +27,6 @@ You should first greet the consumers and ask them whether they want you to summa
     """} ]  # accumulate messages
     return context_header
 
-
 def get_completion_from_messages(messages, model="gpt-3.5-turbo-16k", temperature=0):
     response = openai.ChatCompletion.create(
         model=model,
@@ -55,7 +54,7 @@ def collect_messages( description, reviews, behaviour_records, history, isUserRe
         2. if users want you to summarize the product reviews or ask you questions about reviews,you should based on the following information:
         product information: ```{description}```
         product reviews: ```{reviews}```
-        if you need to summarize reviews, you should give a brief summary based on the reviews. You first tell them the average rating of the comments, and then summarize the information. The summary should be organic and honestly reflect what consumers think about it. 
+        if you need to summarize reviews, you should give a brief summary based on the reviews. You first tell them the average rating, and then summarize the information. The summary should be organic and honestly reflect what consumers think about it. 
         Your summary should be consistent with the content and emotional directions of the reviews. Don't make things up.
         Your summary and answer should not exceed 50 words. Avoid repetition of "As an AI-based assistant/language model","I don't have real-time reviews".
         """}
