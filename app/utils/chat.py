@@ -57,6 +57,7 @@ def collect_messages( description, reviews, behaviour_records, history, isUserRe
         product information: ```{description}```
         product reviews: ```{reviews}```
         if you need to summarize reviews, you should give a brief summary based on the reviews. You should include the average rating of the comments at the beginning of your summary. 
+        For example: "Based on the reviews, the Sennheiser HD 700 headphones have an average rating of 4.55 out of 5. Users praise the exceptional sound quality, comfort, and wide soundstage. Some mention that they are a worthwhile upgrade from previous models. However, a few users have experienced issues with durability and find the treble to be too sharp."/
         The summary should be organic and honestly reflect what consumers think about it. 
         Your summary should be consistent with the content and emotional directions of the reviews. Don't make things up.
         Your summary and answer should not exceed 50 words. Avoid repetition of "As an AI-based assistant/language model","I don't have real-time reviews".
