@@ -56,7 +56,7 @@ def collect_messages( description, reviews, behaviour_records, history, isUserRe
         2. if users want you to summarize the product reviews or ask you questions about reviews, you should do so based on the following information:
         product information: ```{description}```
         product reviews: ```{reviews}```
-        if you need to summarize reviews, you should give a brief summary based on the reviews. You should include the average rating of the comments in the summary. 
+        if you need to summarize reviews, you should give a brief summary based on the reviews. You should include the average rating of the comments at the beginning of your summary. 
         The summary should be organic and honestly reflect what consumers think about it. 
         Your summary should be consistent with the content and emotional directions of the reviews. Don't make things up.
         Your summary and answer should not exceed 50 words. Avoid repetition of "As an AI-based assistant/language model","I don't have real-time reviews".
