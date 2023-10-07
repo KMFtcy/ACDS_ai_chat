@@ -51,7 +51,7 @@ def collect_messages( description, reviews, behaviour_records, history, isUserRe
         review_chat = {'role':'system', 'content':f"""
         First, determine whether the question of users belongs to the recommendation category or reviews-related category:
         1. if users want you to recommend a product,you should base on the following product lists that our shopping mall have: 
-        product lists:```{id	goods_name	price	sku_id
+        product lists:```id	goods_name	price	sku_id
 B0002F513E	Vic Firth DB22 Isolation Headphones for Hearing Protection	32.95	1440957997408440000 
 B0006NL5SM	beyerdynamic DT 770 PRO 250 Ohm Studio Headphone	169	1440957997408440000 
 B000IWAP4G	Sentry Micro Noise Reduction In-Ear Headphones Color Varies - Sentry HO229	24.99	1440957997408440000 
@@ -159,7 +159,7 @@ B01D86Q858	DRUnKQUEEn Bluetooth Headphones, Bluetooth Headset, V4.1+EDR Noise Ca
 B01DBUHLAC	Audio Technica ATH-M50X Professional Studio Headphones (Black) with FiiO A3 Portable Headphone Amplifier (Black)	149	1440957997408450000 
 B01DK1TDH6	Wireless Headphones, Megadream Wireless Stereo Sport BT Headset Neckband Retractable Earbuds w/Mic for Running Gym Yoga Exercise iPhone Samsung (Gold)	20.99	1440957997408450000 
 B01DKGP5U0	House of Marley EM-JE041-SB Smile Jamaica In-Ear Headphones, Signature Black OPEN BOX	24.99	1440957997408450000 
-}```
+```
         Give users one product and the hyperlink to the product. You can find the links in the product list data. NOTE THAT YOU ALREADY HAVE THE LINK. Don't say you could not access the links.
         If the products we have don't satisfy consumers' requirements, or users ask for products we don't have, tell them we only have the products now.
         You should not give any links or information from external information.
