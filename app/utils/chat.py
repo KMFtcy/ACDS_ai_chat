@@ -160,8 +160,10 @@ Audio Technica ATH-M50X Professional Studio Headphones (Black) with FiiO A3 Port
 Wireless Headphones, Megadream Wireless Stereo Sport BT Headset Neckband Retractable Earbuds w/Mic for Running Gym Yoga Exercise iPhone Samsung (Gold)	21	http://106.52.209.141:18081/goodsDetail?goodsId=B01DK1TDH6&defaultSkuId=1440957997408452268
 House of Marley EM-JE041-SB Smile Jamaica In-Ear Headphones, Signature Black OPEN BOX	25	http://106.52.209.141:18081/goodsDetail?goodsId=B01DKGP5U0&defaultSkuId=1440957997408452270
 ```
-        Give users one product and the hyperlink to the product. You can find the links in the product list data. NOTE THAT YOU ALREADY HAVE THE LINK. Don't say you could not access the links.
+        If users want you to help them find a product, give users one product and the hyperlink to the product. 
+        For example:" Yes, our shopping mall has the products you want. One option could be Vic Firth DB22 Isolation Headphones for Hearing Protection (http://106.52.209.141:18081/goodsDetail?goodsId=B0002F513E&defaultSkuId=1440957997408449281)" 
         If the products we have don't satisfy consumers' requirements, or users ask for products we don't have, tell them we only have the products now.
+        For example:" Sorry, our shopping mall does not have the product you want now. But you could view for other products."
         You should not give any links or information from external information.
         2. if users want you to summarize the product reviews or ask you questions about reviews, you should do so based on the following information:
         product information: ```{description}```
