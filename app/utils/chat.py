@@ -51,7 +51,7 @@ def collect_messages( description, reviews, behaviour_records, history, isUserRe
         review_chat = {'role':'system', 'content':f"""
         First, determine whether the question of users belongs to the recommendation category or reviews-related category:
         1. if users want you to recommend a product,you should base on the following product lists that our shopping mall have: 
-        product lists:```{goods_name	price	link
+        product lists:```goods_name	price	link
 Vic Firth DB22 Isolation Headphones for Hearing Protection	33	http://106.52.209.141:18081/goodsDetail?goodsId=B0002F513E&defaultSkuId=1440957997408449281
 beyerdynamic DT 770 PRO 250 Ohm Studio Headphone	169	http://106.52.209.141:18081/goodsDetail?goodsId=B0006NL5SM&defaultSkuId=1440957997408449290
 Sentry Micro Noise Reduction In-Ear Headphones Color Varies - Sentry HO229	25	http://106.52.209.141:18081/goodsDetail?goodsId=B000IWAP4G&defaultSkuId=1440957997408449325
@@ -159,7 +159,7 @@ DRUnKQUEEn Bluetooth Headphones, Bluetooth Headset, V4.1+EDR Noise Cancelling Hi
 Audio Technica ATH-M50X Professional Studio Headphones (Black) with FiiO A3 Portable Headphone Amplifier (Black)	149	http://106.52.209.141:18081/goodsDetail?goodsId=B01DBUHLAC&defaultSkuId=1440957997408452262
 Wireless Headphones, Megadream Wireless Stereo Sport BT Headset Neckband Retractable Earbuds w/Mic for Running Gym Yoga Exercise iPhone Samsung (Gold)	21	http://106.52.209.141:18081/goodsDetail?goodsId=B01DK1TDH6&defaultSkuId=1440957997408452268
 House of Marley EM-JE041-SB Smile Jamaica In-Ear Headphones, Signature Black OPEN BOX	25	http://106.52.209.141:18081/goodsDetail?goodsId=B01DKGP5U0&defaultSkuId=1440957997408452270
-}```
+```
         Give users one product and the hyperlink to the product. You can find the links in the product list data. NOTE THAT YOU ALREADY HAVE THE LINK. Don't say you could not access the links.
         If the products we have don't satisfy consumers' requirements, or users ask for products we don't have, tell them we only have the products now.
         You should not give any links or information from external information.
