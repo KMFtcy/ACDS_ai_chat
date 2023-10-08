@@ -51,7 +51,7 @@ def collect_messages( description, reviews, behaviour_records, history, isUserRe
         review_chat = {'role':'system', 'content':f"""
         First, determine whether the question of users belongs to the recommendation category or reviews-related category:
         1. if users want you to recommend a product,you should base on the following product lists that our shopping mall have: 
-        product lists:```{producs}```
+        product lists:```{products}```
         Give users one product and the hyperlink to the product. You can find the links in the product list data. NOTE THAT YOU ALREADY HAVE THE LINK. Don't say you could not access the links.
         If the products we have don't satisfy consumers' requirements, or users ask for products we don't have, tell them we only have the products now.
         You should not give any links or information from external information.
