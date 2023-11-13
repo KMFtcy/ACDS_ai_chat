@@ -21,4 +21,4 @@ OPENAI_API_KEY = ""
 BACKEND_URL = "http://localhost:1080"
 
 ## ACDS products data path
-ACDS_PRODUCT_DATA_PATH = ""
+ACDS_PRODUCT_DATA_PATH = "/data/acds/products.csv"
