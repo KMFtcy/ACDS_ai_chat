@@ -11,7 +11,7 @@ def init_products(path):
     if not os.path.exists(path):
         sys.exit("products data file not exists")
     # products data should include the product data of the whole online shopping mall. 
-    products=pd.read_csv(path,sep = '\t')
+    products=pd.read_csv(path,sep = ',', encoding='utf-8')
     products=products.loc[:,["id","goods_name","intro","price","selling_point", "sku_id"]]
     # add recommend link
     products["recommend_link"] = ""
