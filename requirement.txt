@@ -1,7 +1,7 @@
 mysqlclient
-flask
+flask == 2.3.3
 flask_sqlalchemy
-openai
+openai == 0.28
 flask_restx
 flask_cors
 pymysql
@@ -9,3 +9,4 @@ pyjwt
 flask_jwt_extended
 openai
 pandas
+requests
