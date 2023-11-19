@@ -10,3 +10,5 @@ flask_jwt_extended
 openai
 pandas
 flask-socketio
+werkzeug == 2.3.7
+requests
