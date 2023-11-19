@@ -1,4 +1,4 @@
-FROM python:3.11.5-bullseye
+FROM python:3.8.18-bullseye
 WORKDIR /app
 
 COPY ./requirement.txt /app/requirement.txt
@@ -11,4 +11,5 @@ RUN rm lazygit.tar.gz lazygit
 
 COPY . .
 
+EXPOSE 18090
 CMD [ "bash", "-c", "while true; do sleep 1000; done;"]
