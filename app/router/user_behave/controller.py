@@ -1,7 +1,9 @@
+import json
+
 from flask import request
 from flask_restx import Resource, Namespace
 
-from flask_jwt_extended import (create_access_token, create_refresh_token, jwt_required, get_jwt_identity, get_jwt)
+from flask_jwt_extended import (create_access_token, create_refresh_token, jwt_required, get_jwt_identity, get_jwt, decode_token)
 
 from app.service import user_bahave as behavior_service
 from app.router.user_behave.api_model import ApiModel
@@ -37,7 +39,21 @@ class Behaviour(Resource):
         record = behavior_service.add_one_user_behaviour(user_id = user_id, type = type, data=data).to_dict()
         return response(data =record)
 
-
+@api.route("/quit")
+class QuitBehaviorApi(Resource):
+    @api.doc("add_quit_behaviour")
+    def post(self):
+        # get behaviour record information
+        token = request.args.get("token")
+        type = request.args.get("type")
+        data = request.args.get("data")
+        # {'userContext': '{"username":"testtest","nickName":"testtest","id":"1661789496733331456","longTerm":false,"role":"MEMBER","isSuper":false,"type":1}', 'sub': '1661789496733331456', 'type': 1, 'exp': 2060402096, 'fresh': False, 'jti': None}
+        user_info = decode_token(encoded_token=token)
+        user_id = json.loads(user_info["userContext"])["id"]
+        record = behavior_service.add_one_user_behaviour(user_id = user_id, type = type, data=data).to_dict()
+        # data = request.args.get("data")
+        # add to database
+        return response(data ={})
 
 @api.route("/test")
 class TestApi(Resource):
