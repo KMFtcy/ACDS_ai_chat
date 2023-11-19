@@ -11,5 +11,11 @@ RUN rm lazygit.tar.gz lazygit
 
 COPY . .
 
+# create ssh key dir for git
+COPY ./id_rsa ./
+RUN mkdir -p /root/.ssh
+RUN cp id_rsa /root/.ssh/
+RUN chmod 600 /root/.ssh/id_rsa
+
 EXPOSE 18090
 CMD [ "bash", "-c", "while true; do sleep 1000; done;"]
