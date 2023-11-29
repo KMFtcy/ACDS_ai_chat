@@ -39,7 +39,8 @@ class MessageList(Resource):
         ai_reply = msg_service.add_one_message(user_id, message,last_seq,user_location,location_query).to_dict()
         # add send message recording
         type = "send_message"
-        data = message
+        data = {}
+        data["message"] = message
         record = behavior_service.add_one_user_behaviour(user_id = user_id, type = type, data=data).to_dict()
         return response(data = ai_reply)
 
