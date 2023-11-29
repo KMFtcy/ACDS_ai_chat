@@ -1,3 +1,4 @@
+import json
 from flask import request
 from flask_restx import Resource, Namespace
 
@@ -41,7 +42,7 @@ class MessageList(Resource):
         type = "send_message"
         data = {}
         data["message"] = message
-        record = behavior_service.add_one_user_behaviour(user_id = user_id, type = type, data=data).to_dict()
+        record = behavior_service.add_one_user_behaviour(user_id = user_id, type = type, data=json.dumps(data)).to_dict()
         return response(data = ai_reply)
 
     @api.doc("delete all messages")
