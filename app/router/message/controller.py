@@ -4,6 +4,7 @@ from flask_restx import Resource, Namespace
 from flask_jwt_extended import (create_access_token, create_refresh_token, jwt_required, get_jwt_identity, get_jwt)
 
 from app.service import message as msg_service
+from app.service import user_bahave as behavior_service
 from app.router.message.api_model import ApiModel
 from app.router.decorate import token_required
 from app.router.request import response
@@ -36,6 +37,10 @@ class MessageList(Resource):
         last_seq = int(last_seq_string)
         user_id = get_jwt_identity()
         ai_reply = msg_service.add_one_message(user_id, message,last_seq,user_location,location_query).to_dict()
+        # add send message recording
+        type = "send_message"
+        data = message
+        record = behavior_service.add_one_user_behaviour(user_id = user_id, type = type, data=data).to_dict()
         return response(data = ai_reply)
 
     @api.doc("delete all messages")
