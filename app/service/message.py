@@ -122,7 +122,7 @@ def add_one_message(
 
 
 def insert_first_reply(user_id):
-    default_message = """Hello! I am ShoppingBot, an automated assistant to help you find the ideal product in this online shopping mall. How can I assist you today? You could ask any questions about the product reviews and product description."""
+    default_message = """Hello! I am ShoppingBot, an automated assistant to help you find the ideal product in this online shopping mall. How can I assist you today? You could ask any questions about the product description and reviews."""
     first_message = MessageModel(
         user_id=user_id, data=default_message, seq_num=1, author="ai"
     )
