@@ -49,8 +49,8 @@ def collect_messages( description, reviews, behaviour_records, history, isUserRe
     # if user is locate in product detail page, add reviews to chat
     if isUserReadDetail:
         review_chat = {'role':'system', 'content':f"""
-        First, determine whether the question of users belongs to the recommendation category or reviews-related category:
-        1. if users want you to recommend a product, you should base on the following product lists that our shopping mall has: 
+        First, determine whether the user query belongs to the recommendation-related category or reviews-related category as illustrated below. Then follow the guidelines below to reply to the query:
+1.	Recommendation-related category. If users ask you to recommend a product, you should base on the following product lists that our shopping mall has: 
         product lists:```good	price	rating
 Vic Firth DB22 Isolation Headphones for Hearing Protection	32.95	4.27
 beyerdynamic DT 990 PRO Over-Ear Studio Headphones in black. Open construction, wired	169	4.48
@@ -141,19 +141,19 @@ Audio Technica ATH-M50X Professional Studio Headphones (Black) with FiiO A3 Port
 Wireless Headphones, Megadream Wireless Stereo Sport BT Headset Neckband Retractable Earbuds w/Mic for Running Gym Yoga Exercise iPhone Samsung (Gold)	20.99	3.4
 iFrogz IF-COD-NBLU Coda Headphones with Mic, Neon Blue	24.99	3
 ```
-        If users want you to help them find a product, give them one product. If there are many products that meet their requirements, please give the one with the highest rating. 
-        For example:" Yes, our shopping mall has the products you want. One option could be Vic Firth DB22 Isolation Headphones for Hearing Protection. Besides, there are also other good products to look for. " 
-        If the products we have don't satisfy consumers' requirements, or users ask for products we don't have, tell them we only have the products now.
-        For example:" Sorry, our shopping mall does not have the product you want now. But you could view for other products."
-        You should not give any links or information from external information. Don't make up products that are not on our product list.
-        2. if users want you to summarize the product reviews or ask you questions about reviews, you should do so based on the following information:
-        product information: ```{description}```
+        If users want you to help them find a product, then give them one product. If there are multiple products that meet the requirements, then recommend the one with the highest rating. 
+        For example:" Yes, our shopping mall has the products you want. One option could be Vic Firth DB22 Isolation Headphones for Hearing Protection. Of course, there are other good products that may fit your preferences. “ 
+        If the products we have do not satisfy the users’ requirements, or they ask for a product that the mall does not have, then tell them we do not have the product and encourage them to check other products.
+        For example:" Sorry, our shopping mall does not have the product you want now. But you could check other products we have."
+        You should not give any links or information from external sources that our shopping mall does not have.
+2.	Reviews-related category. If users want you to summarize the product reviews or ask you questions about reviews or product descriptions, you should do so based on the following information:
+        product description: ```{description}```
         product reviews: ```{reviews}```
-        if you need to summarize reviews, you should give a brief summary based on the reviews. You should include the average rating of the comments at the beginning of your summary. 
+        If users need you to summarize reviews or want to know what other customers think about the product, then give a summary based on the reviews. You should include the average rating of the comments at the beginning of your summary. 
         For example: "Based on the reviews, the Sennheiser HD 700 headphones have an average rating of 4.55 out of 5. Users praise the exceptional sound quality, comfort, and wide soundstage. Some mention that they are a worthwhile upgrade from previous models. However, a few users have experienced issues with durability and find the treble to be too sharp."/
         The summary should be organic and honestly reflect what consumers think about it. 
-        Your summary should be consistent with the content and emotional directions of the reviews. Don't make things up. If you cannot answer or do not have enough information, simply reply that our website or the assistant does not have that information.
-        Your summary and answer should not exceed 50 words. Avoid repetition of "As an AI-based assistant/language model","I don't have real-time reviews".
+        Your summary should be consistent with the content and overall sentiment of the reviews. Do not fabricate. If you cannot answer or do not have enough information, simply reply that our website or the assistant does not have that information.
+        Your answer should not exceed 50 words. Avoid repetition of "As an AI-based assistant/language model, I can’t do/ I don’t have the capacity to do xx" and "I don't have real-time reviews."
         """}
         context.insert(-1,review_chat)
     response = get_completion_from_messages(context) 
