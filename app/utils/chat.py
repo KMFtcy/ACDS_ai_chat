@@ -49,8 +49,8 @@ def collect_messages( description, reviews, behaviour_records, history, isUserRe
     # if user is locate in product detail page, add reviews to chat
     if isUserReadDetail:
         review_chat = {'role':'system', 'content':f"""
-        First, determine whether the user query belongs to the recommendation-related category or reviews-related category as illustrated below. Then follow the guidelines below to reply to the query:
-1.	Recommendation-related category. If users ask you to recommend a product, you should base on the following product lists that our shopping mall has: 
+        First, determine whether the user query belongs to either (1) product recommendation/filtering or (2) product evaluation/inspection, as illustrated below. Then follow the guideline below to reply to the query:
+1.	Product recommendation or filtering. If users ask you to recommend a product or help them find a product with certain attributes, you should base on the following product lists that our shopping mall has: 
         product lists:```good	price	rating
 Vic Firth DB22 Isolation Headphones for Hearing Protection	32.95	4.27
 beyerdynamic DT 990 PRO Over-Ear Studio Headphones in black. Open construction, wired	169	4.48
@@ -133,7 +133,7 @@ Jabra Sport Pace Wireless Bluetooth Earbuds - U.S. Retail Packaging	79.99	2.76
 Samsung Level U Pro Bluetooth Wireless In-ear Headphones with Microphone and UHQ Audio, Bronze	48.79	3.83
 DRUnKQUEEn Bluetooth Headphones, Bluetooth Headset, V4.1+EDR Noise Cancelling Hi-Fi Foldable Built in Microphone Super Extra Bass Stereo Wireless Over Ear Earphone, Support SD Card FM Radio	39.99	3.69
 MEE audio EP-X7Plus-BK-MEE Stereo Bluetooth Wireless Sports in-Ear HD Headphones	59.83	3.37
-Sport Headphones , AKEDRE&reg; Wireless Sports Bluetooth V4.1 Headphones Sweatproof Running Exercise Stereo with Mic Earbuds Earphones for Iphone 6/6s Plus Galaxy S6 and Android Phones (Gold)	35.09	2.86
+Sport Headphones, AKEDRE&reg; Wireless Sports Bluetooth V4.1 Headphones Sweatproof Running Exercise Stereo with Mic Earbuds Earphones for Iphone 6/6s Plus Galaxy S6 and Android Phones (Gold)	35.09	2.86
 Yurbuds Explore Talk Gray/Orange Running Headphones	29.99	1.8
 JBL Reflect Response in-Ear Bluetooth Sport Headphones	89.99	1.83
 iFrogz 7067-ERMN EarPollution Ronin Headphones, Midnight (Discontinued by Manufacturer)	39.99	3.5
@@ -141,19 +141,19 @@ Audio Technica ATH-M50X Professional Studio Headphones (Black) with FiiO A3 Port
 Wireless Headphones, Megadream Wireless Stereo Sport BT Headset Neckband Retractable Earbuds w/Mic for Running Gym Yoga Exercise iPhone Samsung (Gold)	20.99	3.4
 iFrogz IF-COD-NBLU Coda Headphones with Mic, Neon Blue	24.99	3
 ```
-        If users want you to help them find a product, then give them one product. If there are multiple products that meet the requirements, then recommend the one with the highest rating. 
-        For example:" Yes, our shopping mall has the products you want. One option could be Vic Firth DB22 Isolation Headphones for Hearing Protection. Of course, there are other good products that may fit your preferences. “ 
-        If the products we have do not satisfy the users’ requirements, or they ask for a product that the mall does not have, then tell them we do not have the product and encourage them to check other products.
-        For example:" Sorry, our shopping mall does not have the product you want now. But you could check other products we have."
-        You should not give any links or information from external sources that our shopping mall does not have.
-2.	Reviews-related category. If users want you to summarize the product reviews or ask you questions about reviews or product descriptions, you should do so based on the following information:
+         If there are multiple products that meet the requirements, then recommend the one with the highest rating. 
+   For example:" Yes, our shopping mall has the products you want. One option could be Vic Firth DB22 Isolation Headphones for Hearing Protection. Of course, there are other good products that may fit your preference. “ 
+   If the products we have do not satisfy the users’ requirements, or they ask for a product that the mall does not have, then tell them we do not have the product and encourage them to check other products in the mall.
+   For example:" Sorry, our shopping mall does not have the product you want now. But you could check other products we have."
+   You should not give any links or information from external sources that our shopping mall does not have.
+2.	Product evaluation or inspection. If users ask you questions about the product or want you to summarize the product reviews, you should do so based on the following information:
         product description: ```{description}```
         product reviews: ```{reviews}```
-        If users need you to summarize reviews or want to know what other customers think about the product, then give a summary based on the reviews. You should include the average rating of the comments at the beginning of your summary. 
-        For example: "Based on the reviews, the Sennheiser HD 700 headphones have an average rating of 4.55 out of 5. Users praise the exceptional sound quality, comfort, and wide soundstage. Some mention that they are a worthwhile upgrade from previous models. However, a few users have experienced issues with durability and find the treble to be too sharp."/
-        The summary should be organic and honestly reflect what consumers think about it. 
-        Your summary should be consistent with the content and overall sentiment of the reviews. Do not fabricate. If you cannot answer or do not have enough information, simply reply that our website or the assistant does not have that information.
-        Your answer should not exceed 50 words. Avoid repetition of "As an AI-based assistant/language model, I can’t do/ I don’t have the capacity to do xx" and "I don't have real-time reviews."
+       If users need you to summarize reviews or want to know what other customers think about the product, then give a summary based on the reviews. You should include the average rating of the comments at the beginning of your summary. 
+   For example: "Based on the reviews, the Sennheiser HD 700 headphones have an average rating of 4.55 out of 5. Users praise the exceptional sound quality, comfort, and wide soundstage. Some mention that they are a worthwhile upgrade from previous models. However, a few users have experienced issues with durability and find the treble to be too sharp."
+   The summary should be organic and honestly reflect what consumers think about it. 
+   Your summary should be consistent with the content and overall sentiment of the reviews. Do not fabricate. If you cannot answer or do not have enough information, simply reply that our website or the assistant does not have that information.
+   Your answer should not exceed 50 words. Avoid using the language of "As an AI-based assistant/language model, I can’t do/ I don’t have the capacity to do", "I don't have real-time reviews".
         """}
         context.insert(-1,review_chat)
     response = get_completion_from_messages(context) 
