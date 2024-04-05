@@ -149,7 +149,7 @@ iFrogz IF-COD-NBLU Coda Headphones with Mic, Neon Blue	24.99	3
 2.	Product evaluation or inspection. If users ask you questions about the product or want you to summarize the product reviews, you should do so based on the following information:
         product description: ```{description}```
         product reviews: ```{reviews}```
-       If users need you to summarize reviews or want to know what other customers think about the product, then give a summary based on the reviews. You should include the average rating of the comments at the beginning of your summary. 
+       If users need you to summarize reviews or want to know what other customers think about the product, then give a summary based on the reviews. You should include the average rating of the product at the beginning of your summary. 
    For example: "Based on the reviews, the Sennheiser HD 700 headphones have an average rating of 4.55 out of 5. Users praise the exceptional sound quality, comfort, and wide soundstage. Some mention that they are a worthwhile upgrade from previous models. However, a few users have experienced issues with durability and find the treble to be too sharp."
    The summary should be organic and honestly reflect what consumers think about it. 
    Your summary should be consistent with the content and overall sentiment of the reviews. Do not fabricate. If you cannot answer or do not have enough information, simply reply that our website or the assistant does not have that information.
